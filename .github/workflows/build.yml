@@ -1,0 +1,30 @@
+name: Enhanced Whisparr for JPN
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily
+  workflow_dispatch:     # Manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+        with:
+          repository: Whisparr/Whisparr
+          ref: master
+
+      - name: Apply patch
+        run: |
+          git apply ../fix-parser.patch
+
+      - name: Build Docker image
+        run: |
+          docker build -t whisparr-enhanced .
+
+      - name: Push to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker tag whisparr-enhanced winzzzzz/whisparr-enhanced:latest
+          docker push winzzzzz/whisparr-enhanced:latest
