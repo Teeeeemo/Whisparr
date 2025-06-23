@@ -13,18 +13,22 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: Whisparr/Whisparr
-          ref: master
+          ref: eros
 
       - name: Apply patch
         run: |
           git apply fix-parser.patch
 
-      - name: Build Docker image
-        run: |
-          docker build -t whisparr-enhanced .
+  call:
+    uses: Teeeeemo/build-workflow/.github/workflows/build-on-call.yml@master
+    secrets: inherit
 
-      - name: Push to Docker Hub
-        run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker tag whisparr-enhanced winzzzzz/whisparr-enhanced:latest
-          docker push winzzzzz/whisparr-enhanced:latest
+      # - name: Build Docker image
+      #   run: |
+      #     docker build -t whisparr-enhanced .
+
+      # - name: Push to Docker Hub
+      #   run: |
+      #     echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      #     docker tag whisparr-enhanced winzzzzz/whisparr-enhanced:latest
+      #     docker push winzzzzz/whisparr-enhanced:latest
