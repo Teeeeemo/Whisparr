@@ -15,9 +15,14 @@ jobs:
           repository: Whisparr/Whisparr
           ref: eros
 
+      - name: Checkout patch repository
+        uses: actions/checkout@v3
+        with:
+          repository: Teeeeemo/whisparr-patch
+          path: patch
+
       - name: Apply patch
-        run: |
-          git apply fix-parser.patch
+        run: git apply patch/fix-parser.patch
 
   call:
     uses: Teeeeemo/build-workflow/.github/workflows/build-on-call.yml@master
