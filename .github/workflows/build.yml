@@ -17,7 +17,7 @@ jobs:
 
       - name: Apply patch
         run: |
-          git apply ../fix-parser.patch
+          git apply fix-parser.patch
 
       - name: Build Docker image
         run: |
