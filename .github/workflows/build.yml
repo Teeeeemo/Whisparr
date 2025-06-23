@@ -24,6 +24,12 @@ jobs:
       - name: Apply patch
         run: git apply patch/fix-parser.patch
 
+      - name: Debug DOCKERHUB_TOKEN secret
+        env:
+          TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          echo "DEBUG: The DOCKERHUB_TOKEN is: $TOKEN"
+
   call:
     uses: Teeeeemo/build-workflow/.github/workflows/build-on-call.yml@master
     secrets: inherit
