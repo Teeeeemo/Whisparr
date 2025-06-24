@@ -32,7 +32,7 @@ jobs:
 
   call:
     uses: Teeeeemo/build-workflow/.github/workflows/build-on-call.yml@master
-    # secrets: inherit
+    secrets: inherit
 
       # - name: Build Docker image
       #   run: |
