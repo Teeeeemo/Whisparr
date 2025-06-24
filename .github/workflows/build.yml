@@ -31,7 +31,7 @@ jobs:
       #     echo "DEBUG: The DOCKERHUB_TOKEN is: $TOKEN" | sed 's/./& /g'
 
   call:
-    uses: Teeeeemo/build-workflow/.github/workflows/build-on-call.yml@master
+    uses: ${{ github.repository_owner }}/build-workflow/.github/workflows/build-on-call.yml@master
     secrets: inherit
 
       # - name: Build Docker image
