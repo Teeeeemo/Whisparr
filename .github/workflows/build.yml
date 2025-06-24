@@ -18,7 +18,7 @@ jobs:
       - name: Checkout patch repository
         uses: actions/checkout@v3
         with:
-          repository: ${{ github.repository_owner }}/whisparr-patch
+          repository: teemosyndra/whisparr-patch
           path: patch
 
       - name: Apply patch
@@ -31,7 +31,7 @@ jobs:
       #     echo "DEBUG: The DOCKERHUB_TOKEN is: $TOKEN" | sed 's/./& /g'
 
   call:
-    uses: ${{ github.repository_owner }}/build-workflow/.github/workflows/build-on-call.yml@master
+    uses: teemosyndra/build-workflow/.github/workflows/build-on-call.yml@master
     secrets: inherit
 
       # - name: Build Docker image
